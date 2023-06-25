@@ -57,30 +57,30 @@ class User extends Authenticatable
     ];
 
 
-    public function getNameAttribute()
-        {
-            return $this->attributes['name'];
-        }
+    // public function getNameAttribute()
+    //     {
+    //         return $this->attributes['name_english'];
+    //     }
 
-        public function employeesCreated()
-        {
-            return $this->hasMany(Employee::class, 'created_by');
-        }
+    //     public function employeesCreated()
+    //     {
+    //         return $this->hasMany(Employee::class, 'created_by');
+    //     }
 
-        public function employeesUpdated()
-        {
-            return $this->hasMany(Employee::class, 'updated_by');
-        }
+    //     public function employeesUpdated()
+    //     {
+    //         return $this->hasMany(Employee::class, 'updated_by');
+    //     }
 
-    // public function createdBy() {
-    //     return $this->belongsTo('App\Models\User','created_by','id') ;
-    // }
+    public function createdBy() {
+        return $this->belongsTo('App\Models\User','created_by','id') ;
+    }
 
-    // public function updatedBy() {
-    //     return $this->belongsTo('App\Models\User','updated_by','id') ;
-    // }
+    public function updatedBy() {
+        return $this->belongsTo('App\Models\User','updated_by','id') ;
+    }
 
-    // public function deletedBy() {
-    //     return $this->belongsTo('App\Models\User','deleted_by','id') ;
-    // }
+    public function deletedBy() {
+        return $this->belongsTo('App\Models\User','deleted_by','id') ;
+    }
 }

@@ -81,9 +81,9 @@
                         <tr>
                             @php
                                 $time = new DateTime($row->startTime, new DateTimeZone('GMT+6'));
-                                $startTime = $time->format("h:i:s");
+                                $startTime = $time->format("h:i:s A");
                                 $time = new DateTime($row->endTime, new DateTimeZone('GMT+6'));
-                                $endTime = $time->format("h:i:s");
+                                $endTime = $time->format("h:i:s A");
                             @endphp
                             <td>{{ $loop->iteration }}.</td>
                             <td>{{ $startTime }}</td>

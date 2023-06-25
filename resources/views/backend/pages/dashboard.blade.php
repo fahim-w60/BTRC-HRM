@@ -30,16 +30,18 @@
                                 if($t>"12:00:00")
                                 {
                             @endphp
-                                    <p>Good Afternoon</p>
+                                    <h6>Good Afternoon</h6>
                             @php
                                 }
                                 else if($t<="12:00:00")
                                 {
                             @endphp
-                                    <p>Good Morning</p>
+                                    <h6>Good Morning</h6>
                             @php
                                 }
                             @endphp
+
+                            <button class="btn btn-primary text-right" data-toggle="modal" data-target="#attendanceModal"  title="Give Your Attendance">clock in</button>
 
                         </div>
                         <div class="card-body">
@@ -101,6 +103,56 @@
             <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
         </section>
+
+        {{-- modal for employee attendance form  --}}
+        <div class="modal fade" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="text-align: center;">Take Disciplinary Action</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="employee_id">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Actions:</label>
+                      <select class="form-control @if($errors->has('disciplinary_action')) is-invalid @endif" name="disciplinary_action" required>
+                            <option value="">Select Action</option>
+
+                      </select>
+                      @if($errors->has('disciplinary_action'))
+                            <span class="error invalid-feedback">{!! $errors->first('disciplinary_action') !!}</span>
+                      @endif
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Punishment Start Date:</label>
+                      <input type="date" name="punishment_start_date" class="form-control" id="punishment_start_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Punishment End Date:</label>
+                        <input type="date" name="punishment_end_date" class="form-control" id="punishment_end_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Reason</label>
+                        <textarea name="action_reason" class="form-control" id="" cols="5" rows="2"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+              </div>
+            </div>
+        </div>
+
+
 
         <section class="content">
 

@@ -5,7 +5,18 @@
                     <div class="card-header bg-secondary text-white center text-justify">STEP 1/4 - Personal Info</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Employee Id(Unique)</label>
+                                    <input type="number" class="form-control @if($errors->has('employee_id')) is-invalid @endif" placeholder="Enter Employee Unique Id" wire:model="employee_id">
+                                    @if($errors->has('employee_id'))
+                                        <span class="error invalid-feedback">{!! $errors->first('employee_id') !!}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Employee Name(English)</label>
                                     <input type="text" class="form-control @if($errors->has('name_english')) is-invalid @endif" placeholder="Enter Employee Name(English)" wire:model="name_english">
@@ -15,7 +26,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Employee Name(Bangla)</label>
                                     <input type="text" class="form-control @if($errors->has('name_bangla')) is-invalid @endif" placeholder="Enter Employee Name(Bangla)" wire:model="name_bangla">
@@ -25,7 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Employee Father Name(English)</label>
                                     <input type="text" class="form-control @if($errors->has('father_name_english')) is-invalid @endif" placeholder="Enter Employee Father Name(English)" wire:model="father_name_english">

@@ -57,7 +57,7 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
 
     //employee section
     Route::resource('employee', EmployeeController::class);
-    Route::post('employee/list',[EmployeeController::class, 'employee_list'])->name('employee.list');
+    Route::get('employee/list',[EmployeeController::class, 'employee_list'])->name('employee.list');
 
     //Department section
     Route::resource('department', DepartmentController::class);

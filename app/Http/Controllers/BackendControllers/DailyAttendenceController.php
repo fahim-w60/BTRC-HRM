@@ -4,7 +4,7 @@ namespace App\Http\Controllers\BackendControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Employee;
+use App\Models\User;
 use App\Models\AttendenceLog;
 use Auth;
 use Carbon\Carbon;
@@ -30,7 +30,7 @@ class DailyAttendenceController extends Controller
             'outTime' => 'required',
         ]);
 
-        $employees = Employee::where('status',1)->latest()->get()->pluck('id');
+        $employees = User::where('status',1)->latest()->get()->pluck('id');
 
         //dd(sizeof($employees));
 

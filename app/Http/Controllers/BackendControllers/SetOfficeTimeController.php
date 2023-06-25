@@ -17,7 +17,9 @@ class SetOfficeTimeController extends Controller
         $commons['main_menu'] = 'attendance';
         $commons['current_menu'] = 'setOfficeTime';
 
-        $times = SetOfficeTime::where('status',1)->get();
+        $times = SetOfficeTime::where('status',1)
+        ->with('createdBy','updatedBy')
+        ->get();
         //dd($times);
         return view('backend.pages.officeTime.index',compact('commons','times'));
     }
@@ -28,6 +30,9 @@ class SetOfficeTimeController extends Controller
             'startTime' => 'required',
             'endTime' => 'required',
         ]);
+
+        //dd($request->startTime);
+        //dd($request->endTime);
         $id = 1;
         $data = SetOfficeTime::findOrFail($id);
         $data->startTime = $request->startTime;

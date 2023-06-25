@@ -17,7 +17,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Faisal rabbani',
+
+            'name_english' => 'Faisal rabbani',
+            'employee_id' => 1000000000001,
             'email' => 'farzad.edsoft@gmail.com',
             'password' => bcrypt('123456'),
             'user_type' => 'system',
@@ -26,11 +28,14 @@ class UsersTableSeeder extends Seeder
             'permissions' => 'create, read, update, delete',
             'status' => 1,
             'created_at' => Carbon::now(),
-            'created_by' => 1
+            'created_by' => 1,
+
         ]);
 
         DB::table('users')->insert([
-            'name' => 'HR Admin',
+
+            'name_english' => 'HR Admin',
+            'employee_id' => 1000000000002,
             'email' => 'hr.admin@gmail.com',
             'password' => bcrypt('123456'),
             'user_type' => 'hr',
@@ -39,11 +44,14 @@ class UsersTableSeeder extends Seeder
             'permissions' => 'create, read, update, delete',
             'status' => 1,
             'created_at' => Carbon::now(),
-            'created_by' => 1
+            'created_by' => 1,
+
         ]);
 
         DB::table('users')->insert([
-            'name' => 'EMPLOYEE',
+
+            'name_english' => 'EMPLOYEE',
+            'employee_id' => 1000000000003,
             'email' => 'employee@gmail.com',
             'password' => bcrypt('123456'),
             'user_type' => 'employee',
@@ -52,11 +60,14 @@ class UsersTableSeeder extends Seeder
             'permissions' => 'create, read, update',
             'status' => 1,
             'created_at' => Carbon::now(),
-            'created_by' => 1
+            'created_by' => 1,
+
         ]);
 
         DB::table('users')->insert([
-            'name' => 'CHAIRMAN',
+
+            'name_english' => 'CHAIRMAN',
+            'employee_id' => 1000000000004,
             'email' => 'chairman@gmail.com',
             'password' => bcrypt('123456'),
             'user_type' => 'chairman',
@@ -65,11 +76,14 @@ class UsersTableSeeder extends Seeder
             'permissions' => 'create, read, update',
             'status' => 1,
             'created_at' => Carbon::now(),
-            'created_by' => 1
+            'created_by' => 1,
+
         ]);
 
         DB::table('users')->insert([
-            'name' => 'DIRECTOR_GENERAL',
+
+            'name_english' => 'DIRECTOR_GENERAL',
+            'employee_id' => 1000000000005,
             'email' => 'director_general@gmail.com',
             'password' => bcrypt('123456'),
             'user_type' => 'director_general',
@@ -78,10 +92,13 @@ class UsersTableSeeder extends Seeder
             'permissions' => 'create, read, update',
             'status' => 1,
             'created_at' => Carbon::now(),
-            'created_by' => 1
+            'created_by' => 1,
+
         ]);
         DB::table('users')->insert([
-            'name' => 'DIRECTOR_ADMIN',
+
+            'name_english' => 'DIRECTOR_ADMIN',
+            'employee_id' => 1000000000006,
             'email' => 'director_admin@gmail.com',
             'password' => bcrypt('123456'),
             'user_type' => 'director_admin',
@@ -90,7 +107,8 @@ class UsersTableSeeder extends Seeder
             'permissions' => 'create, read, update',
             'status' => 1,
             'created_at' => Carbon::now(),
-            'created_by' => 1
+            'created_by' => 1,
+
         ]);
 
     }

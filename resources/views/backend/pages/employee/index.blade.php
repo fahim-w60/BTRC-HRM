@@ -99,6 +99,9 @@
                 $('#example1').append(headerRow);
 
                 $.each(response, function(index, item) {
+
+                console.log(item);
+
                 var row = '<tbody>';
                 row += '<tr>';
                 row += '<td>' + ++index + '</td>';
@@ -121,11 +124,11 @@
                 row += '<div class="card card-body timestamps_collapse_body">';
                 row += '<span>Created At: ' + moment(item.created_at).fromNow() + '</span>'; // Using Moment.js for date formatting
                 //  console.log(item.created_at)
-                row += '<span>Created By: ' + (item.created_by && item.created_by.name ? item.created_by.name : 'NA') + '</span>';
+                row += '<span>Created By: ' + (item.created_by && item.created_by.name_english ? item.created_by.name_english : 'NA') + '</span>';
 
-                console.log(index);
 
-                row += '<span>Updated At: ' + moment(item.updated_at).fromNow() + '</span>';
+
+                row += '<span>Updated At: ' + (item.updated_at ? moment(item.updated_at).fromNow() : 'NA') + '</span>';
                 row += '<span>Updated By: ' + (item.updatedBy ? item.updatedBy.name : 'NA') + '</span>';
                 row += '</div>';
                 row += '</div>';

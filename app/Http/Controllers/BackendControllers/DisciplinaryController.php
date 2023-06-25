@@ -4,7 +4,7 @@ namespace App\Http\Controllers\BackendControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Employee;
+use App\Models\User;
 use App\Models\Department;
 use App\Models\DisciplinaryAction;
 use App\Models\TakenDisciplinaryActionAgainstEmployee;
@@ -72,10 +72,10 @@ class DisciplinaryController extends Controller
 
         $departments = Department::where('status',1)->get();
 
-        $employees = Employee::join('departments', 'employees.department_id', '=', 'departments.id')
-        ->where('employees.department_id', $request->department)
-        ->where('employees.status',1)
-        ->select('employees.*')
+        $employees = User::join('departments', 'users.department_id', '=', 'departments.id')
+        ->where('users.department_id', $request->department)
+        ->where('users.status',1)
+        ->select('users.*')
         ->with(['createdBy', 'updatedBy'])
         ->paginate(3);
 

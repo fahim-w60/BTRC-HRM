@@ -4,7 +4,8 @@ namespace App\Http\Livewire;
 use App\Models\Department;
 use App\Models\Designation;
 use Livewire\WithFileUploads;
-use App\Models\Employee;
+use App\Models\User;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,6 +13,8 @@ use Livewire\Component;
 class MultistepEmployee extends Component
 {
     use WithFileuploads;
+
+
 
     public $name_english;
     public $name_bangla;
@@ -44,6 +47,15 @@ class MultistepEmployee extends Component
     public $emergency_relation;
     public $employee_photo;
     public $employee_sign;
+
+    public $employee_id;
+    public $password;
+    public $user_type;
+    public $belongs_to;
+    public $role_id;
+    public $accesses;
+    public $permissions;
+
 
     public $totalSteps = 4;
     public $currentStep = 1;
@@ -87,6 +99,7 @@ class MultistepEmployee extends Component
         if($this->currentStep == 1)
         {
             $this->validate([
+                'employee_id' => 'required|string',
                 'name_english' => 'required|string',
                 'father_name_english' => 'required|string',
                 'mother_name_english' => 'required|string',
@@ -139,6 +152,7 @@ class MultistepEmployee extends Component
 
             $values = array(
 
+                "employee_id" => $this->employee_id,
                 "name_english" => $this->name_english,
                 "name_bangla" => $this->name_bangla,
                 "father_name_english" => $this->father_name_english,
@@ -170,8 +184,20 @@ class MultistepEmployee extends Component
                 "emergency_relation" => $this->emergency_relation,
                 "employee_photo" => $e_photo,
                 "employee_sign" => $signature,
+
+
+                "password" => bcrypt('123456'),
+                "user_type" => 'employee',
+                "belongs_to" => 2,
+                "role_id" => 3,
+                "permissions" => implode(',',['create', 'read', 'update', 'delete']),
+                "status" => 1,
+
+
                 "created_at" => Carbon::now(),
                 "created_by" => Auth::user()->id,
+
+
 
             );
         }
@@ -183,6 +209,7 @@ class MultistepEmployee extends Component
 
             $values = array(
 
+                "employee_id" => $this->employee_id,
                 "name_english" => $this->name_english,
                 "name_bangla" => $this->name_bangla,
                 "father_name_english" => $this->father_name_english,
@@ -213,6 +240,16 @@ class MultistepEmployee extends Component
                 "emergency_contact" => $this->emergency_contact,
                 "emergency_relation" => $this->emergency_relation,
                 "employee_photo" => $e_photo,
+
+
+                "password" => bcrypt('123456'),
+                "user_type" => 'employee',
+                "belongs_to" => 2,
+                "role_id" => 3,
+                "permissions" => implode(',',['create', 'read', 'update', 'delete']),
+
+                "status" => 1,
+
                 "created_at" => Carbon::now(),
                 "created_by" => Auth::user()->id,
             );
@@ -223,6 +260,7 @@ class MultistepEmployee extends Component
             $upload_sign = $this->employee_sign->storeAs('employee_sign',$signature);
             $values = array(
 
+                "employee_id" => $this->employee_id,
                 "name_english" => $this->name_english,
                 "name_bangla" => $this->name_bangla,
                 "father_name_english" => $this->father_name_english,
@@ -253,6 +291,16 @@ class MultistepEmployee extends Component
                 "emergency_contact" => $this->emergency_contact,
                 "emergency_relation" => $this->emergency_relation,
                 "employee_sign" => $signature,
+
+
+
+                "password" => bcrypt('123456'),
+                "user_type" => 'employee',
+                "belongs_to" => 2,
+                "role_id" => 3,
+                "permissions" => implode(',',['create', 'read', 'update', 'delete']),
+                "status" => 1,
+
                 "created_at" => Carbon::now(),
                 "created_by" => Auth::user()->id,
             );
@@ -262,6 +310,7 @@ class MultistepEmployee extends Component
 
             $values = array(
 
+                "employee_id" => $this->employee_id,
                 "name_english" => $this->name_english,
                 "name_bangla" => $this->name_bangla,
                 "father_name_english" => $this->father_name_english,
@@ -291,13 +340,23 @@ class MultistepEmployee extends Component
                 "salary" => $this->salary,
                 "emergency_contact" => $this->emergency_contact,
                 "emergency_relation" => $this->emergency_relation,
+
+
+
+                "password" => bcrypt('123456'),
+                "user_type" => 'employee',
+                "belongs_to" => 2,
+                "role_id" => 3,
+                "permissions" => implode(',',['create', 'read', 'update', 'delete']),
+                "status" => 1,
+
                 "created_at" => Carbon::now(),
                 "created_by" => Auth::user()->id,
             );
 
         }
 
-        Employee::insert($values);
+        User::insert($values);
         return redirect()
                 ->route('employee.create')
                 ->with('success', 'Employee created successfully!');

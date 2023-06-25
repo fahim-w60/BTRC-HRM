@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
 
-            $table->id();
+            $table->increments('id');
+            $table->string('email')->unique();
+
+            $table->bigInteger('employee_id')->unique();
             $table->string('name_english')->nullable();
             $table->string('name_bangla')->nullable();
             $table->string('father_name_english')->nullable();
@@ -30,7 +33,6 @@ return new class extends Migration
             $table->string('blood_group')->nullable();
             $table->string('nid')->nullable();
             $table->string('mobile')->nullable();
-            $table->string('email')->unique();
             $table->string('present_address_english')->nullable();
             $table->string('present_address_bangla')->nullable();
             $table->string('permanent_address_bangla')->nullable();
@@ -45,10 +47,22 @@ return new class extends Migration
             $table->bigInteger('salary')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('emergency_relation')->nullable();
-            $table->string('employee_photo')->nullable();
             $table->string('employee_sign')->nullable();
-            $table->tinyInteger('status')->comment('0=Inactive,1=Active')->default(1)->nullable();
 
+            $table->text('employee_photo')->nullable();
+
+            $table->string('password');
+            $table->enum('user_type', ['system', 'hr', 'employee','chairman','director_general','director_admin'])->default('system');
+            $table->unsignedTinyInteger('belongs_to')->default(0)->comment('0=SYSTEM 1=HR and 2=EMPLOYEE. User belongs to council except 0');
+            $table->unsignedTinyInteger('role_id');
+            $table->longText('accesses')->nullable()->comment('All the named routes will be the accesses for roles');
+            $table->string('permissions')->nullable()->comment('Create,Read,Update,Delete will be the permissions');
+            $table->rememberToken();
+
+
+
+
+            $table->unsignedTinyInteger('status')->comment('0=Inactive,1=Active');
             $table->timestamp('created_at')->nullable();
             $table->unsignedInteger('created_by')->nullable();
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\User;
 use DB;
 
 class EmployeeController extends Controller
@@ -30,6 +31,15 @@ class EmployeeController extends Controller
 
         $designations = Designation::all();
         $departments = Department::all();
+
+        // $data = User::join('designations', 'designations.id', '=', 'users.designation_id')
+        // ->join('departments', 'departments.id', '=', 'users.department_id')
+        // ->where('users.designation_id', 1)
+        // ->select('users.*','departments.name')
+
+        // ->get();
+        // dd($data);
+
         return view('backend.pages.employee.index',compact('commons','designations','departments'));
     }
 
@@ -42,12 +52,13 @@ class EmployeeController extends Controller
 
 
 
-        $data = Employee::join('designations', 'designations.id', '=', 'employees.designation_id')
-                ->join('departments', 'departments.id', '=', 'employees.department_id')
-                ->where('employees.designation_id', $request->designation)
-                ->select('employees.*','departments.name')
-                ->with(['getUser','createdBy', 'updatedBy'])
+        $data = User::join('designations', 'designations.id', '=', 'users.designation_id')
+                ->join('departments', 'departments.id', '=', 'users.department_id')
+                ->where('users.designation_id', $request->designation)
+                ->select('users.*','departments.name')
+                ->with('createdBy','updatedBy')
                 ->get();
+
 
 
         return response()->json($data);
