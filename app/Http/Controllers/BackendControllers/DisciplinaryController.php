@@ -161,7 +161,7 @@ class DisciplinaryController extends Controller
 
         $punishedEmplyoees = TakenDisciplinaryActionAgainstEmployee::where('disciplinary_action',$request->disciplinaryAction)
             ->where('status',1)
-            ->with(['getEmployee'])
+            ->with(['getEmployee',])
             ->get();
 
          //dd($punishedEmplyoees);

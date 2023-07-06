@@ -28,8 +28,13 @@ class TakenDisciplinaryActionAgainstEmployee extends Model
         return $this->belongsTo(User::class, 'deleted_by', 'id');
     }
 
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
     public function getEmployee()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(User::class,'employee_id');
     }
 }

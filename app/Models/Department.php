@@ -25,9 +25,10 @@ class Department extends Model
         return $this->belongsTo('App\Models\User', 'updated_by', 'id');
     }
 
-    public function employees()
-    {
-        return $this->belongsTo(Employee::class, 'department_id');
-    }
+
+    // public function disciplinaryActions()
+    // {
+    //     return $this->hasMany(User::class,'id');
+    // }
 
 }

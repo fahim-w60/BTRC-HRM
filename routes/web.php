@@ -77,7 +77,8 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
 
     //Attendence Section
     Route::resource('dailyAttendance',DailyAttendenceController::class);
-
+    Route::post('clockIn/daily',[DailyAttendenceController::class,'clockInAttendance'])->name('clockIn.dashboard');
+    Route::post('clockOut/daily',[DailyAttendenceController::class,'clockOutAttendance'])->name('clockOut.dashboard');
 
 });
 

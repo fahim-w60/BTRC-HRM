@@ -60,7 +60,10 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}.</td>
                                     <td>{{  $row->getEmployee->name_english }}</td>
-                                    <td>{{  $row->getEmployee->getDepartment->name }}</td>
+                                    {{-- @php
+                                        $department = Department::find($row->getEmployee->department_id);
+                                    @endphp --}}
+                                    <td>{{ $row->getEmployee->getDepartment->name}}</td>
                                     @include('backend.pages.commons.timestamps_td')
                                     <td class="custom_actions">
                                         <div class="btn-group">

@@ -47,6 +47,30 @@ class DailyAttendenceController extends Controller
         }
 
         return redirect()->route('dailyAttendance.index')->with('success','Daily Attendence Get Successfully');
-
     }
+    public function clockInAttendance()
+    {
+        date_default_timezone_set('Asia/Dhaka');
+        $data = new AttendenceLog();
+        $data->employee_id = Auth::user()->id;
+        $data->attendance_date = date('Y-m-d');
+        $timeStamp = time();
+        $data->inTime = date('H:i',$timeStamp);
+        // $data->outTime = $request->outTime;
+        $data->created_by = Auth::user()->id;
+        $data->created_at = Carbon::now();
+        $data->save();
+
+        return back()->with('success','Your Clock In Time Upadated Successfully');
+    }
+    public function clockOutAttendance()
+    {
+        date_default_timezone_set('Asia/Dhaka');
+        $timeStamp = time();
+        $outTime = date('H:i',$timeStamp);
+        $data = AttendenceLog::where('attendance_date',date('Y-m-d'))->where('employee_id',Auth::user()->id)->whereNotNull('inTime')->update(['outTime' => $outTime]);
+
+        return back()->with('success','Your Clock Out Time Upadated Successfully');
+    }
+
 }

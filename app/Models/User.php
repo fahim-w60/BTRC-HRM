@@ -83,4 +83,8 @@ class User extends Authenticatable
     public function deletedBy() {
         return $this->belongsTo('App\Models\User','deleted_by','id') ;
     }
+    public function getDepartment()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 }
