@@ -142,6 +142,24 @@
 
     </ul>
 
+    <ul class="nav nav-treeview">
+
+        <li class="nav-item @if($commons['main_menu'] == 'attendance') menu-open @endif">
+            <a
+                href="{{ route('report.index') }}"
+                class="nav-link @if($commons['current_menu'] == 'attendance_report') active @endif"
+            >
+            <i class="fa fa-sticky-note" style="font-size: 15px"></i>
+            <p>
+                <span class="badge badge-success">Attendance -></span>
+                Report
+            </p>
+            </a>
+        </li>
+
+
+    </ul>
+
 
 </li>
 

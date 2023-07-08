@@ -26,4 +26,8 @@ class AttendenceLog extends Model
     {
         return $this->belongsTo(User::class,'deleted_by','id');
     }
+    public function getName()
+    {
+        return $this->belongsTo(User::class,'employee_id','id');
+    }
 }

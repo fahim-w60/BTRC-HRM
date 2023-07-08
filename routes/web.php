@@ -18,6 +18,7 @@ use App\Http\Controllers\BackendControllers\{
     DisciplinaryController,
     SetOfficeTimeController,
     DailyAttendenceController,
+    ReportController,
 };
 
 /*
@@ -79,6 +80,10 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
     Route::resource('dailyAttendance',DailyAttendenceController::class);
     Route::post('clockIn/daily',[DailyAttendenceController::class,'clockInAttendance'])->name('clockIn.dashboard');
     Route::post('clockOut/daily',[DailyAttendenceController::class,'clockOutAttendance'])->name('clockOut.dashboard');
+
+
+    //Report Section
+    Route::resource('report',ReportController::class);
 
 });
 

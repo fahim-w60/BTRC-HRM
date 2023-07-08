@@ -44,7 +44,7 @@
                             @php
                                 $clockIn = App\Models\AttendenceLog::where('attendance_date',date('Y-m-d'))->where('employee_id',Auth::user()->id)->first();
                                 // var_dump($clockIn);
-                                $clockOut = App\Models\AttendenceLog::where('attendance_date',date('Y-m-d'))->where('employee_id',Auth::user()->id)->WhereNotNull('inTime')->first();
+                                $clockOut = App\Models\AttendenceLog::where('attendance_date',date('Y-m-d'))->where('employee_id',Auth::user()->id)->WhereNotNull('inTime')->WhereNotNull('outTime')->first();
                             @endphp
                             {{-- dd($clockIn); --}}
                             @if($clockIn == '')
@@ -53,13 +53,13 @@
                                 <button type="submit" class="btn btn-primary text-right"  title="Give Your Attendance">Clock In</button>
                             </form>
                             @endif
-                            @if($clockIn)
+                            @if($clockIn != '' && $clockOut == '')
                             <form action="{{ route('clockOut.dashboard') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <button type="submit" class="btn btn-primary text-right"  title="Give Your Attendance">Clock Out</button>
                             </form>
                             @endif
-                            @if()
+                            @if($clockOut != '')
                                 <h4>Your Total Attendance Is Done</h4>
                             @endif
 
