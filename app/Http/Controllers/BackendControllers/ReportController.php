@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AttendenceLog;
+use App\Models\Department;
+use App\Models\Designation;
+use App\Models\SetOfficeTime;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -30,6 +34,7 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+
         $commons['page_title'] = 'Attendance Report';
         $commons['content_title'] = 'Attendance Report';
         $commons['main_menu'] = 'attendance';
@@ -38,12 +43,57 @@ class ReportController extends Controller
         $request->validate([
             'start_date' => 'required',
             'end_date' => 'required',
-            'name_english' => 'required',
+            'employee_id' => 'required',
         ]);
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-        $name = $request->name_english;
 
-        $reportData[] = '';
+        $officeTime = SetOfficeTime::where('status',1)->first();
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $employee_id = $request->employee_id;
+
+        $name = User::where('status',1)->where('id',$employee_id)->first();
+        $dept = Department::where('status',1)->where('id',$name->department_id)->first();
+        $des = Designation::where('status',1)->where('id',$name->designation_id)->first();
+
+        $dateRange = Carbon::parse($startDate)->range($endDate)->toArray();
+        $reportData = [];
+
+        //dd($dateRange);
+
+        foreach($dateRange as $date)
+        {
+            $attendance = AttendenceLog::where('attendance_date',$date)->where('employee_id',$employee_id)->first();
+            //dd($attendance);
+            $lateCalc = '';
+            $holiday = '';
+            if($attendance)
+            {
+                if($attendance->inTime > $officeTime->startTime)
+                {
+                    $lateCalc = 1;
+                    $time = intval($attendance->inTime) - intval($officeTime->startTime);
+                }
+                $totalDuty = intval($attendance->outTime) - intval($attendance->inTime);
+            }
+
+
+            $data = [
+
+                'date' => $date->format('Y-m-d'),
+                'status' => $attendance ? 'Present' : 'Absent',
+                'inTime' => $attendance ? $attendance->inTime : '-',
+                'outTime' => $attendance ? $attendance->outTime : '-',
+                'lateStatus' => $lateCalc ? $time.' '.'Late' : 'OnTime',
+                'totalDuty' => $attendance ? $totalDuty : '-',
+                'isFriday' => $date->isFriday(),
+                'holiday' => $holiday ? 'Holiday' : '-',
+            ];
+
+            $reportData[] = $data;
+        }
+
+        return view('backend.pages.dailyAttendence.format',compact('commons','reportData','name','dept','des'));
+
+
     }
 }

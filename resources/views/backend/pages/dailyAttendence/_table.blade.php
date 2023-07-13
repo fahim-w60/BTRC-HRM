@@ -19,28 +19,34 @@
                 <div class="col-md-4">
 
                     <label for="start_date" class="form-label">Start Date</label>
-                    <input type="date" name="start_date" class="form-control" id="start_date" required>
+                    <input type="date" name="start_date" class="form-control @if($errors->has('start_date')) is-invalid @endif" id="start_date" >
+                    @if($errors->has('start_date'))
+                            <span class="error invalid-feedback"> {!! $errors->first('start_date') !!} </span>
+                    @endif
 
                 </div>
 
                 <div class="col-md-4">
 
                 <label for="end_date" class="form-label">End Date</label>
-                <input type="date" name="end_date" class="form-control" id="end_date" required>
+                <input type="date" name="end_date" class="form-control @if($errors->has('start_date')) is-invalid @endif" id="end_date" >
+                @if($errors->has('end_date'))
+                            <span class="error invalid-feedback"> {!! $errors->first('end_date') !!} </span>
+                @endif
 
                 </div>
 
                 <div class="col-md-4">
                 <div class="form-group  @if ($errors->has('name_english')) has-error @endif">
                         <label class="control-label">Select Employee </label>
-                        <select name="employee_name" id="name" class="form-control select2 @if($errors->has('name')) is-invalid @endif" value="{!! old('department_name') !!}">
+                        <select name="employee_id" id="name" class="form-control select2 @if($errors->has('name')) is-invalid @endif" value="{!! old('department_name') !!}">
                             @foreach($emp as $employee)
-                                <option value="{!! $employee->name_english !!}" @if(old('type') == $employee->name_english) {!! 'selected' !!} @endif>{!! $employee->name_english !!}</option>
+                                <option value="{!! $employee->id !!}" @if(old('type') == $employee->id) {!! 'selected' !!} @endif>{!! $employee->name_english !!}</option>
                             @endforeach
                         </select>
 
-                        @if($errors->has('name_english'))
-                            <span class="error invalid-feedback"> {!! $errors->first('name_english') !!} </span>
+                        @if($errors->has('employee_id'))
+                            <span class="error invalid-feedback"> {!! $errors->first('employee_id') !!} </span>
                         @else
                             <span class="help-block" style="color:maroon">*Select Employee first ! </span>
                         @endif

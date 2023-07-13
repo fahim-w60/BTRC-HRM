@@ -10,7 +10,7 @@
         <!-- /.card-header -->
 
         <div class="card-body p-0">
-            <table class="table table-responsive-md table-responsive-lg table-responsive-sm text-center">
+            <table id="example" class="table table-responsive-md table-responsive-lg table-responsive-sm text-center">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
