@@ -84,6 +84,8 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
 
     //Report Section
     Route::resource('report',ReportController::class);
+    Route::post('get-attendaceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
+
 
 });
 

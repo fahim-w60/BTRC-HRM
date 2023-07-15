@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('set_office_times', function (Blueprint $table) {
             $table->id();
-            $table->time('startTime')->nullable();
-            $table->time('endTime')->nullable();
+            $table->string('startTime')->nullable();
+            $table->string('endTime')->nullable();
             $table->tinyInteger('status')->comment('0=Inactive,1=Active')->default(1)->nullable();
 
             $table->timestamp('created_at')->nullable();

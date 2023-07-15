@@ -2,21 +2,13 @@
 
 @section('page_level_css_plugins')
 
-<link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
 @endsection
 
 @section('page_level_css_files')
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-  <link href="https://fonts.maateen.me/adorsho-lipi/font.css" rel="stylesheet">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/dist/css/adminlte.min.css') }}">
+
 @endsection
+
 
 @section('content')
 <section class="content">
@@ -184,89 +176,20 @@
     </div>
 
 </section>
-
-
-@endsection
-
-
-<!-- BEGIN PAGE LEVEL PLUGINS -->
 @section('page_level_js_plugins')
 
-  <!-- DataTables  & Plugins -->
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/jszip/jszip.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/pdfmake/pdfmake.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/pdfmake/vfs_fonts.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-  <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-  <!-- AdminLTE App -->
-  <script src="{{ asset('AdminLTE-3.2.0/dist/js/adminlte.min.js') }}"></script>
-  <!-- AdminLTE for demo purposes -->
-  {{-- <script src="{{ asset('AdminLTE-3.2.0/dist/js/demo.js') }}"></script> --}}
-
 
 
 
 @endsection
-{{-- <!-- END PAGE LEVEL PLUGINS --> --}}
 
-{{-- <!-- BEGIN PAGE LEVEL SCRIPTS --> --}}
 @section('page_level_js_scripts')
 
 
 <script type="text/javascript">
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
 
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-
-    $('#attendanceReportPdf').click(function(e){
-        e.preventDefault();
-        console.log('Hello');
-        $.ajax({
-            type: 'POST',
-            url: '/get-attendaceReport-pdf',
-            // headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         },
-            data: {
-                name: '{{ $name->name_english }}',
-                date: '{{ date('Y-m-d') }}',
-                designation: '{{ $des->name }}',
-                department: '{{ $dept->name }}',
-                reportData: {!! json_encode($reportData) !!},
-            },
-            beforeSend: function(){
-                //alert('{{ $des->name }}');
-                //console.log('hello from before send');
-            },
-
-            success:function(response){
-                console.log('hello from success');
-            },
-            error: function(e){
-                //console.log('hello from error');
-            },
-        });
-    });
 </script>
 
 
 @endsection
+
