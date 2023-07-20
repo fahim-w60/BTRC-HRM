@@ -10,7 +10,9 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\SetOfficeTime;
 use Carbon\Carbon;
-use Mpdf\Mpdf;
+
+use Illuminate\Support\Facades\View;
+
 
 class ReportController extends Controller
 {
@@ -100,14 +102,17 @@ class ReportController extends Controller
     public function generatePdf(Request $request)
     {
 
-        $name = $request->input('name');
-        $date = $request->input('date');
-        $designation = $request->input('designation');
-        $department = $request->input('department');
-        $reportData = $request->input('reportData');
-        return response()->json($request);
+        $name = $request->name;
+        $date = $request->date;
+        $designation = $request->designation;
+        $department = $request->department;
+        $reportData = json_decode($request->input('reportData'),true);
+        $officeTime = $request->officeTime;
 
-        $fileName = 'attendance-report-pdf';
+        //dd($reportData);
+
+
+         $fileName = 'attendance-report.pdf';
 
 
         $mPdf = new \Mpdf\Mpdf([
@@ -120,13 +125,13 @@ class ReportController extends Controller
             'default_font' => 'nikosh',
             'default_font_size' => 12
         ]);
+        $html = View::make('backend.pages.dailyAttendence.pdf',compact('name','date','designation','department','reportData','officeTime'))->render();
 
-        $html = View::make('backend.pages.dailyAttendence.pdf',['reportData' => $reportData,'name' => $name,'date' => $date, 'designation' => $designation, 'department' => $department ])->render();
-
-        $stylesheet = file_get_contents('pdf/css/pdf.css');
-        $mPdf->WriteHTML($stylesheet,1);
-        $mPdf->WriteHTML($html,2);
-         $mPdf->WriteHTML($html);
+        //$stylesheet = file_get_contents('pdf/css/pdf.css');
+        //$mPdf->WriteHTML($stylesheet,1);
+        $mPdf->WriteHTML($html);
+        // $mPdf->WriteHTML($html);
         $mPdf->Output($fileName, 'D');
+
     }
 }

@@ -36,14 +36,27 @@
             </div>
             <br><br>
             <div class="d-flex justify-content-between mb-5">
-                <h6>Name: {{ $name->name_english }}</h6>
-                <h6>Date: {{ date('Y-m-d') }}</h6>
-                <h6>Designation: {{ $des->name }}</h6>
-                <h6>Department: {{ $dept->name }}</h6>
+                <h6> Name: {{ $name->name_english }}</h6>
+                <h6> Date: {{ date('Y-m-d') }}</h6>
+                <h6> Designation: {{ $des->name }}</h6>
+                <h6> Department: {{ $dept->name }}</h6>
             </div>
-            <div class="mb-3">
-                <button class="btn btn-outline-primary" type="button" id="attendanceReportPdf">PDF</button>
-                <button class="btn btn-outline-dark" type="button">Excel</button>
+            <div class="mb-3 d-flex">
+                <form action="{{ route('attendance.pdf') }}" method="post" enctype="multipart/form-data" class="mx-2">
+                    @csrf
+                    <input type="hidden" name="name" value="{{ $name->name_english }}">
+                    <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+                    <input type="hidden" name="designation" value="{{ $des->name }}">
+                    <input type="hidden" name="department" value="{{ $dept->name }}">
+                    <input type="hidden" name="reportData" value="{{ json_encode($reportData) }}">
+                    <input type="hidden" name="officeTime" value="{{ $officeTime }}">
+                    <button class="btn btn-outline-primary" type="submit" id="">PDF</button>
+                </form>
+
+                <form action="3">
+                    <button class="btn btn-outline-dark" type="submit">Excel</button>
+                </form>
+
             </div>
 
                 <div class="card">
@@ -207,6 +220,7 @@
   <script src="{{ asset('AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
   <!-- AdminLTE App -->
   <script src="{{ asset('AdminLTE-3.2.0/dist/js/adminlte.min.js') }}"></script>
+  {{-- <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script> --}}
   <!-- AdminLTE for demo purposes -->
   {{-- <script src="{{ asset('AdminLTE-3.2.0/dist/js/demo.js') }}"></script> --}}
 
@@ -219,53 +233,70 @@
 {{-- <!-- BEGIN PAGE LEVEL SCRIPTS --> --}}
 @section('page_level_js_scripts')
 
+{{-- <script type="text/javascript">
+
+
+</script> --}}
+
+
 
 <script type="text/javascript">
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+//    $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
 
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
+    $(document).ready(function(){
+    //     $('#attendanceReportPdf').click(function (e) {
+    //     e.preventDefault();
+    //     console.log('Hello');
+    //     $.ajax({
+    //         type: 'GET', // Change POST to GET
+    //         url: '/backend/get-attendanceReport-pdf',
+    //         data: { // Remove the data field
+    //             name: '{{ $name->name_english }}',
+    //             date: '{{ date('Y-m-d') }}',
+    //             designation: '{{ $des->name }}',
+    //             department: '{{ $dept->name }}',
+    //             officeTime: 'officeTime',
+    //             reportData: {!! json_encode($reportData) !!},
+    //         },
+    //         success: function (response) {
+    //             const blob = new Blob([response], { type: 'application/pdf' });
+    //             const url = window.URL.createObjectURL(blob);
+    //             const a = document.createElement('a');
+    //             a.href = url;
+    //             a.download = 'attendance-report.pdf';
+    //             document.body.appendChild(a);
+    //             a.click();
+    //             window.URL.revokeObjectURL(url);
+    //             document.body.removeChild(a);
+    //         },
+    //         error: function (e) {
+    //             // Handle the error if needed
+    //         },
+    //     });
+    // });
 
-    $('#attendanceReportPdf').click(function(e){
-        e.preventDefault();
-        console.log('Hello');
-        $.ajax({
-            type: 'POST',
-            url: '/get-attendaceReport-pdf',
-            // headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         },
-            data: {
-                name: '{{ $name->name_english }}',
-                date: '{{ date('Y-m-d') }}',
-                designation: '{{ $des->name }}',
-                department: '{{ $dept->name }}',
-                reportData: {!! json_encode($reportData) !!},
-            },
-            beforeSend: function(){
-                //alert('{{ $des->name }}');
-                //console.log('hello from before send');
-            },
 
-            success:function(response){
-                console.log('hello from success');
-            },
-            error: function(e){
-                //console.log('hello from error');
-            },
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
     });
+
 </script>
 
 

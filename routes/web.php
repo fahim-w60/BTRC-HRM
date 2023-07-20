@@ -19,6 +19,7 @@ use App\Http\Controllers\BackendControllers\{
     SetOfficeTimeController,
     DailyAttendenceController,
     ReportController,
+
 };
 
 /*
@@ -84,12 +85,10 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
 
     //Report Section
     Route::resource('report',ReportController::class);
-    Route::post('get-attendaceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
+    // Route::post('/get-attendaceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
+
+    Route::post('/get-attendanceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
 
 
-});
 
-
-Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function (){
-Route::post('get-department-by-office', [AjaxController::class, 'getDepartmentsByOffice'])->name('get-department-by-office');
 });
