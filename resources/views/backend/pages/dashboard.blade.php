@@ -50,13 +50,15 @@
                             @if($clockIn == '')
                             <form action="{{ route('clockIn.dashboard') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <button type="submit" class="btn btn-primary text-right"  title="Give Your Attendance">Clock In</button>
+                                <button type="submit" class="btn btn-primary text-right mb-2"  title="Give Your Attendance">Clock In</button>
+                                <h5>You are not clocked in yet!</h5>
                             </form>
                             @endif
                             @if($clockIn != '' && $clockOut == '')
                             <form action="{{ route('clockOut.dashboard') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <button type="submit" class="btn btn-primary text-right"  title="Give Your Attendance">Clock Out</button>
+                                <button type="submit" class="btn btn-primary text-right mb-3"  title="Give Your Attendance">Clock Out</button>
+                                <h5>You are not clocked out yet!</h5>
                             </form>
                             @endif
                             @if($clockOut != '')

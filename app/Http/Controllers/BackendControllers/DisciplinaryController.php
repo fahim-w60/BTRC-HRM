@@ -140,7 +140,7 @@ class DisciplinaryController extends Controller
         $commons['page_title'] = 'Punished Employee List';
         $commons['content_title'] = 'Punished Employee List';
         $commons['main_menu'] = 'action';
-        $commons['current_menu'] = 'punishedEmployeeList';
+        $commons['current_menu'] = 'punishedEmployee_List';
 
         $actions = DisciplinaryAction::where('status',1)->get();
         $punishedEmplyoees = '';
@@ -153,7 +153,7 @@ class DisciplinaryController extends Controller
         $commons['page_title'] = 'Punished Employee List';
         $commons['content_title'] = 'Punished Employee List';
         $commons['main_menu'] = 'action';
-        $commons['current_menu'] = 'punishedEmployeeList';
+        $commons['current_menu'] = 'punishedEmployee_List';
 
         $request->validate([
             'disciplinaryAction' => 'required',

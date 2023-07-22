@@ -123,7 +123,7 @@ class ReportController extends Controller
             'margin_header' => 5,
             'margin_footer' => 5,
             'default_font' => 'nikosh',
-            'default_font_size' => 12
+            'default_font_size' => 10,
         ]);
         $html = View::make('backend.pages.dailyAttendence.pdf',compact('name','date','designation','department','reportData','officeTime'))->render();
 

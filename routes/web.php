@@ -19,7 +19,7 @@ use App\Http\Controllers\BackendControllers\{
     SetOfficeTimeController,
     DailyAttendenceController,
     ReportController,
-
+    LeaveController,
 };
 
 /*
@@ -86,9 +86,9 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
     //Report Section
     Route::resource('report',ReportController::class);
     // Route::post('/get-attendaceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
-
     Route::post('/get-attendanceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
 
-
+    //Leave Section
+    Route::resource('leave',LeaveController::class);
 
 });

@@ -201,62 +201,75 @@
         <li class="nav-item @if($commons['main_menu'] == 'action') menu-open @endif">
             <a
                 href="{{ route('punished.employee.list') }}"
-                class="nav-link @if($commons['current_menu'] == 'punished_employee') active @endif"
+                class="nav-link @if($commons['current_menu'] == 'punishedEmployee_List') active @endif"
             >
             <i class="nav-icon fas fa-user-check"></i>
                 <p>Punished Employee List</p>
             </a>
         </li>
-
-
-
     </ul>
 </li>
 
-<li class="nav-item @if($commons['main_menu'] == 'trainer') menu-open @endif">
+
+
+
+
+<li class="nav-item @if($commons['main_menu'] == 'leave') menu-open @endif">
     <a
         href="#"
-        class="nav-link @if($commons['main_menu'] == 'trainer') active @endif"
+        class="nav-link @if($commons['main_menu'] == 'add_leave') active @endif"
     >
-        <i class="nav-icon fas fa-user-shield"></i>
+        <i class="nav-icon fas fa-user-tie"></i>
         <p>
-           Payroll
+           Leave Manager
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
     <ul class="nav nav-treeview">
 
-        <li class="nav-item">
-            <a
-                href="#"
-                class="nav-link @if($commons['current_menu'] == 'trainer_create') active @endif"
-            >
-                <i class="fas fa-plus nav-icon"></i>
-                <p>Sallary Generate</p>
-            </a>
-        </li>
 
-        <li class="nav-item">
+        <li class="nav-item @if($commons['main_menu'] == 'leave') menu-open @endif">
             <a
-                href=""
-                class="nav-link @if($commons['current_menu'] == 'trainer_index') active @endif"
+                href="{{ route('leave.index') }}"
+                class="nav-link @if($commons['current_menu'] == 'add_leave') active @endif"
             >
-                <i class="fas fa-list nav-icon"></i>
-                <p>Manage Sallary</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a
-                href=""
-                class="nav-link @if($commons['current_menu'] == 'trainer_create') active @endif"
-            >
-                <i class="fas fa-plus nav-icon"></i>
-                <p>Generate Report</p>
+                <i class="nav-icon fas fa-list"></i>
+                <p>Add Leave</p>
             </a>
         </li>
     </ul>
 </li>
+
+
+
+<li class="nav-item @if($commons['main_menu'] == '') menu-open @endif">
+    <a
+        href="#"
+        class="nav-link @if($commons['main_menu'] == '') active @endif"
+    >
+        <i class="nav-icon fas fa-user-tie"></i>
+        <p>
+           Leave Manager
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+
+
+        <li class="nav-item @if($commons['main_menu'] == '') menu-open @endif">
+            <a
+                href="{{ route('leave.index') }}"
+                class="nav-link @if($commons['current_menu'] == '') active @endif"
+            >
+                <i class="nav-icon fas fa-list"></i>
+                <p>Add Leave</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
+
+
 
 
 
