@@ -16,4 +16,8 @@ class LeaveController extends Controller
 
         return view('backend.pages.leave.index',compact('commons'));
     }
+    public function store(Request $request)
+    {
+        return back()->with('success', 'Leave Added successfully!');
+    }
 }

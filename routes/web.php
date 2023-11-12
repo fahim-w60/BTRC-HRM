@@ -54,12 +54,12 @@ Route::group(['namespace' => 'AuthControllers'], function () {
 
 
 Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function () {
-
     Route::get('dashboard', [DashboardController::class, 'getDashboard'])->name('get.dashboard');
 
     //employee section
     Route::resource('employee', EmployeeController::class);
-    Route::get('employee/list',[EmployeeController::class, 'employee_list'])->name('employee.list');
+    Route::get('all/employee/list',[EmployeeController::class, 'allEmployeeList'])->name('all.employee.list');
+    Route::post('employee/update',[EmployeeController::class, 'update'])->name('employee.update');
 
     //Department section
     Route::resource('department', DepartmentController::class);
@@ -82,7 +82,6 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
     Route::post('clockIn/daily',[DailyAttendenceController::class,'clockInAttendance'])->name('clockIn.dashboard');
     Route::post('clockOut/daily',[DailyAttendenceController::class,'clockOutAttendance'])->name('clockOut.dashboard');
 
-
     //Report Section
     Route::resource('report',ReportController::class);
     // Route::post('/get-attendaceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
@@ -90,5 +89,4 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
 
     //Leave Section
     Route::resource('leave',LeaveController::class);
-
 });

@@ -69,16 +69,6 @@
 <li class="nav-header">Employee</li>
 
 
-{{-- <li class="nav-item @if($commons['main_menu'] == 'activity') menu-open @endif">
-    <a
-        href=""
-        class="nav-link @if($commons['current_menu'] == 'activity_create') active @endif"
-    >
-        <i class="nav-icon fas fa-plus"></i>
-        <p>Position</p>
-    </a>
-</li> --}}
-
 
 <li class="nav-item @if($commons['main_menu'] == 'employee') menu-open @endif">
     <a
@@ -240,33 +230,6 @@
     </ul>
 </li>
 
-
-
-<li class="nav-item @if($commons['main_menu'] == '') menu-open @endif">
-    <a
-        href="#"
-        class="nav-link @if($commons['main_menu'] == '') active @endif"
-    >
-        <i class="nav-icon fas fa-user-tie"></i>
-        <p>
-           Leave Manager
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-
-
-        <li class="nav-item @if($commons['main_menu'] == '') menu-open @endif">
-            <a
-                href="{{ route('leave.index') }}"
-                class="nav-link @if($commons['current_menu'] == '') active @endif"
-            >
-                <i class="nav-icon fas fa-list"></i>
-                <p>Add Leave</p>
-            </a>
-        </li>
-    </ul>
-</li>
 
 
 

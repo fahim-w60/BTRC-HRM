@@ -30,7 +30,7 @@
                                 if($t>"12:00:00")
                                 {
                             @endphp
-                                    <h6>Good Afternoon</h6>
+                                    <h6>Good Noon</h6>
                             @php
                                 }
                                 else if($t<="12:00:00")

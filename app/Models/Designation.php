@@ -25,6 +25,9 @@ class Designation extends Model
         return $this->belongsTo('App\Models\User', 'updated_by', 'id');
     }
 
-
+    public function deleteBy()
+    {
+        return $this->belongsTo('App\Models\User','deleted_by','id');
+    }
 
 }

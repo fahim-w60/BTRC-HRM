@@ -22,13 +22,47 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'name_english',
+        'employee_id',
         'email',
         'profile_image',
         'password',
+        'user_type',
+        'belongs_to',
+        'belongs_to',
         'role_id',
         'accesses',
         'permissions',
         'remember_token',
+        'name_bangla',
+        'father_name_english',
+        'father_name_bangla',
+        'mother_name_english',
+        'mother_name_bangla',
+        'spouse_name1',
+        'spouse_name2',
+        'date_of_birth',
+        'gender',
+        'marital_status',
+        'blood_group',
+        'nid',
+        'mobile',
+        'present_address_english',
+        'present_address_bangla',
+        'permanent_address_bangla',
+        'department_id',
+        'designation_id',
+        'date_of_join',
+        'commission_date',
+        'promotion_date',
+        'telephone_office',
+        'telephone_home',
+        'pbx',
+        'salary',
+        'emergency_contact',
+        'emergency_relation',
+        'employee_sign',
+        'employee_photo',
         'status',
         'created_at',
         'created_by',
@@ -86,5 +120,18 @@ class User extends Authenticatable
     public function getDepartment()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function getChildInfo()
+    {
+        return $this->hasMany(ChildInfo::class, 'user_id');
+    }
+    public function getEducationalHistory()
+    {
+        return $this->hasMany(EducationalHistory::class, 'user_id');
+    }
+    public function getTrainingHistory()
+    {
+        return $this->hasMany(TrainingHistory::class, 'user_id');
     }
 }

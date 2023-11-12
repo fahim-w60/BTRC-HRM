@@ -23,7 +23,7 @@ class DisciplinaryController extends Controller
 
         $disciplines = DisciplinaryAction::where('status',1)->paginate(5);
 
-        return view('backend.pages.disciplinaryAction.create',compact('commons','disciplines'));
+        return view('backend.pages.disciplinaryaction.create',compact('commons','disciplines'));
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class DisciplinaryController extends Controller
 
         $departments = Department::where('status',1)->get();
         $employees = '';
-        return view('backend.pages.disciplinaryAction.index',compact('commons','departments','employees'));
+        return view('backend.pages.disciplinaryaction.index',compact('commons','departments','employees'));
    }
 
    public function employee_list(Request $request)
@@ -83,7 +83,7 @@ class DisciplinaryController extends Controller
 
         $disciplinary_actions = DisciplinaryAction::all();
 
-        return view('backend.pages.disciplinaryAction.index',compact('commons','departments','employees','disciplinary_actions'));
+        return view('backend.pages.disciplinaryaction.index',compact('commons','departments','employees','disciplinary_actions'));
    }
 
    public function disciplinary_action(Request $request)

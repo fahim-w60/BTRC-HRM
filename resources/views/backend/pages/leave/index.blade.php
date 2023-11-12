@@ -20,7 +20,7 @@
                 Note:: Leave Management
             </div>
         </div>
-        <form action="#" method="post" data-bitwarden-watching="1" enctype="multipart/form-data" accept-charset="UTF-8">
+        <form action="{{ route('leave.store') }}" method="post" data-bitwarden-watching="1" enctype="multipart/form-data" accept-charset="UTF-8">
             @csrf
             <div class="card-body">
                 <div class="row">
@@ -72,21 +72,48 @@
             <table id="example" class="table table-responsive-md table-responsive-lg table-responsive-sm text-center">
                 <thead>
                     <tr>
+                        <th style="width: 10px">#</th>
                         <th>Leave Name</th>
                         <th>Leave Type</th>
-                        <th>inTime</th>
-                        <th>outTime</th>
-                        <th>lateStatus</th>
-                        <th>totalDuty</th>
-                        <th>isFriday</th>
-                        <th>holiday</th>
+                        @include('backend.pages.commons.timestamps_th')
+
+                        <th class="custom_actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($reportData as $data)
 
-
-                    @endforeach --}}
+                    <tr>
+                        <td>1</td>
+                        <td>অর্জিত ছুটি(Earned Leave)</td>
+                        <td>Paid</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>অসাধারণ ছুটি(Extraordinary Leave)</td>
+                        <td>Paid</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>মাতৃত্বকালীন ছুটি(Maternity Leave)</td>
+                        <td>Paid</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>শিক্ষা ছুটি(Study Leave)</td>
+                        <td>Paid</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -115,3 +142,6 @@
 
 
 @endsection
+
+
+

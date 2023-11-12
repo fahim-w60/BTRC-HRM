@@ -25,7 +25,10 @@ class Department extends Model
         return $this->belongsTo('App\Models\User', 'updated_by', 'id');
     }
 
-
+    public function deleteBy()
+    {
+        return $this->belongsTo('App\Models\User','deleted_by','id');
+    }
     // public function disciplinaryActions()
     // {
     //     return $this->hasMany(User::class,'id');

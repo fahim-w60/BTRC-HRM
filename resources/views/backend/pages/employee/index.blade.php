@@ -12,7 +12,7 @@
     <section class="content">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('employee.list') }}" id="myForm" method="post" enctype="multipart/form-data">
+                <form action="{{ route('all.employee.list') }}" id="myForm" method="" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-8">
@@ -43,10 +43,60 @@
             <div class="card-body">
                 <div class="card-body p-0 mt-2">
                     <table class="table table-responsive-md table-responsive-lg table-responsive-sm text-center" id="example1">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Name</th>
+                                <th>Email</th>
 
+                                @include('backend.pages.commons.timestamps_th')
+
+                                <th class="custom_actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @if($employee)
+                                    @foreach($employee as $row)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}.</td>
+                                            <td>{{ $row->name_english }}</td>
+                                            <td>{{ $row->email  }}</td>
+
+                                            @include('backend.pages.commons.timestamps_td')
+
+                                            <td class="custom_actions">
+                                                <div class="btn-group">
+                                                    <a href="{{ route('employee.show', $row->id) }}" class="btn btn-flat btn-outline-info btn-sm" data-toggle="tooltip" title="Edit">
+                                                        <i class="far fa fa-eye"></i>
+
+                                                    <a href="{{ route('employee.edit', $row->id) }}" class="btn btn-flat btn-outline-info btn-sm" data-toggle="tooltip" title="Edit">
+                                                        <i class="far fa-edit"></i>
+                                                    </a>
+
+                                                    </a>
+                                                    <form method="post" class="list_delete_form" action="#" accept-charset="UTF-8" >
+                                                        {{ csrf_field() }}
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-flat btn-outline-danger btn-sm" data-toggle="tooltip" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
                     </table>
                 </div>
+            @if($employee)
+                <div class="card-footer">
+                    {{ $employee->withQueryString()->links('pagination::bootstrap-5') }}
+                </div>
+            @endif
         </div>
+</div>
     </section>
 @endsection
 
@@ -59,96 +109,9 @@
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 @section('page_level_js_scripts')
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        $('#myForm').submit(function(e) {
-            e.preventDefault();
-            var url = $(this).attr('action');
-            var data = $(this).serialize();
-
-            $.ajax({
-            url: url,
-            type: 'POST',
-            data: data,
-            success: function(response) {
-                $('#example1').empty();
-
-                // console.log(response);
-
-                var headerRow = '<thead>';
-                headerRow += '<tr>';
-                headerRow += '<th>#</th>';
-                headerRow += '<th>Name</th>';
-                headerRow += '<th>Email</th>';
-                headerRow += '<th>Department</th>';
-                headerRow += '<th>Status</th>';
-                headerRow += '<th>Timestamp</th>';
-                headerRow += '</tr>';
-
-                // Include the Blade template using a placeholder
-                headerRow += '<tr>';
-
-
-                headerRow += '</td>';
-                headerRow += '</tr>';
-
-                headerRow += '</thead>';
-                $('#example1').append(headerRow);
-
-                $.each(response, function(index, item) {
-
-                console.log(item);
-
-                var row = '<tbody>';
-                row += '<tr>';
-                row += '<td>' + ++index + '</td>';
-                row += '<td>' + item.name_english + '</td>';
-                row += '<td>' + item.email + '</td>';
-                row += '<td>' + item.name + '</td>';
-                row += '<td>';
-
-                // Conditionally display a badge based on $data->status
-                if (item.status == 1) {
-                    row += '<span class="right badge badge-success">Active</span>';
-                } else {
-                    row += '<span class="right badge badge-danger">Inactive</span>';
-                } + '</td>';
-
-                row += '<td>' + '<button type="button" class="btn btn-flat btn-sm btn-outline-primary custom_btn" data-toggle="collapse" href="#timestamps' + index + 'details" role="button" aria-expanded="false" aria-controls="trainee' + index + 'details">';
-                row += '<i class="fa fas fa-clock pr-2" aria-hidden="true"></i>User';
-                row += '</button>';
-                row += '<div class="collapse" id="timestamps' + index + 'details">';
-                row += '<div class="card card-body timestamps_collapse_body">';
-                row += '<span>Created At: ' + moment(item.created_at).fromNow() + '</span>'; // Using Moment.js for date formatting
-                //  console.log(item.created_at)
-                row += '<span>Created By: ' + (item.created_by && item.created_by.name_english ? item.created_by.name_english : 'NA') + '</span>';
-
-
-
-                row += '<span>Updated At: ' + (item.updated_at ? moment(item.updated_at).fromNow() : 'NA') + '</span>';
-                row += '<span>Updated By: ' + (item.updatedBy ? item.updatedBy.name : 'NA') + '</span>';
-                row += '</div>';
-                row += '</div>';
-                row += '</td>';
-
-                row += '</tr>';
-                row += '</tbody>';
-                $('#example1').append(row);
-                });
-            },
-            error: function(xhr) {
-                // Error handling
-            }
-            });
-
-        });
-    });
+<script>
 
 </script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 @endsection

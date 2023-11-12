@@ -64,7 +64,7 @@ return new class extends Migration
             $table->text('employee_photo')->nullable();
 
 
-            $table->unsignedTinyInteger('status')->comment('0=Inactive,1=Active');
+            $table->unsignedTinyInteger('status')->default(1)->comment('0=Inactive,1=Active');
             $table->timestamp('created_at')->nullable();
             $table->unsignedInteger('created_by')->nullable();
 
