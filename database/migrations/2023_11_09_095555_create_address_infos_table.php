@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('address_infos', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedInteger('user_id');
             $table->text('present_address_english');
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('nid');
             $table->unsignedInteger('mobile');
             $table->string('email')->nullable();
-            $table->boolean('status')->default(1)->comment(['0=>Inactive', '1=>Active']);
+            $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
             $table->timestamps();
             $table->softDeletes();
         });

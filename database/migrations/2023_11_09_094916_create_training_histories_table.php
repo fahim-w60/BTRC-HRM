@@ -14,14 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('training_histories', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedInteger('user_id');
             $table->string('training_name');
             $table->text('training_description')->nullable();
             $table->string('training_start_date');
             $table->string('training_end_date')->nullable();
-            $table->boolean('status')->default(1)->comment('0=>Inactive', '1=>Active');
+            $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,14 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('child_infos', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedInteger('user_id');
             $table->string('child_name');
             $table->string('childDateOfBirth');
             $table->text('child_institute_name')->nullable();
-            $table->boolean('educational_status')->default(0)->comment(['0=>Inactive', '1=>Active']);
-            $table->boolean('status')->default(1)->comment(['0=>Inactive', '1=>Active']);
+            $table->boolean('educational_status')->default(0)->comment('0=>Inactive, 1=>Active');
+            $table->boolean('status')->default(1)->comment('0=>Inactive, 1=>Active');
             $table->timestamps();
             $table->softDeletes();
         });

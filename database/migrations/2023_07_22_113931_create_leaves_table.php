@@ -15,8 +15,13 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
-            $table->string('leave_name');
+            $table->string('name');
+            $table->string('type');
+            $table->text('description')->nullable();
+            $table->unsignedInteger('entry')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
