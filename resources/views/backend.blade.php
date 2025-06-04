@@ -3,6 +3,12 @@
 <head>
     @include('backend.partials._head')
 </head>
+
+<style>
+    .sidebar-dark-primary{
+        background-color: rgb(2, 3, 15) !important;
+    }
+</style>
 <body class="hold-transition sidebar-mini">
 
     <div class="wrapper">
@@ -12,7 +18,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
             <a href="#" class="" style="display: block; background-color: white; text-align: center;">
-                <img src="{{ asset('Custom/img/small_btrc.png') }}"  alt="Bangladesh Telecommunication Regulatory Commission" class="navbar-brand">
+                <img src="{{ asset('img/logo1.png') }}"  alt="Bangladesh Telecommunication Regulatory Commission" class="navbar-brand">
             </a>
 
             <!--Sidebar-->

@@ -21,26 +21,13 @@ class RegisterController extends Controller
 
     /*show register form*/
     public function getRegister(){
-        /*check if user logged in then return to dashboard*/
-        if(Auth::user()){
-            return redirect()->route('dashboard')
-                ->with('warning', 'You are already logged in');
-        }
-
-        /*create & set common data array*/
-        $common_data = new Array_();
-        $common_data->title = 'Register';
-        $common_data->sub_title = '';
-        $common_data->main_menu = '';
-        $common_data->sub_menu = '';
-        $common_data->current_menu = '';
-
-        /*fetch all countries*/
-        $countries = Countries::all();
-
-        /*return register page with data*/
-        return view('auth.user_register')
-            ->with(compact('common_data', 'countries'));
+        $commons['title'] = 'Login';
+        $commons['sub_title'] = 'Login';
+        $commons['main_menu'] = 'Login';
+        $commons['sub_menu'] = 'Login';
+        $commons['current_menu'] = 'Login';
+        return view('frontend.register')
+            ->with(compact('commons'));
     }
 
     /*process register form*/

@@ -21,7 +21,7 @@ class LoginController extends Controller
         $commons['sub_menu'] = 'Login';
         $commons['current_menu'] = 'Login';
 
-        return view('auth.login')
+        return view('frontend.login')
             ->with(compact('commons'));
     }
 

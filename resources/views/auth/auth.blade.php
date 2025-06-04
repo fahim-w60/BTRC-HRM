@@ -21,8 +21,13 @@
      </style>
 
 </head>
+
+
+
 <body class="hold-transition login-page">
 @yield("content")
+
+
 <!-- /.login-box -->
 
 <!-- jQuery -->

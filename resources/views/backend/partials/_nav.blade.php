@@ -7,9 +7,9 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <div class="custom_title">
-                <p class="mb-0"> Bangladesh Telecommunication Regulatory Commission.</p>
+                <p class="mb-0"> LAWYER.</p>
                 <small class="mb-0 text-maroon"
-                    >H R M</small
+                    ></small
 
             </div>
         </li>
